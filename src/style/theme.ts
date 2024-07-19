@@ -1,12 +1,17 @@
 export type ThemeName = "light" | "dark";
-type ColorKey = "primary" | "background" | "secondary" | "third";
+export type ColorKey = "primary" | "background" | "secondary" | "third";
+export type HeadingSize = "large" | "medium" | "small";
+
 
 interface Theme {
     name: ThemeName;
-    // color: {
-    //     [key in ColorKey]: string;
-    // };
     color: Record<ColorKey, string>;
+    heading: {
+        // HeadingSize의 key들만 가져오겠다
+        [key in HeadingSize]: {
+            fontSize: string;
+        };
+    };
 };
 
 export const light: Theme = {
@@ -17,9 +22,21 @@ export const light: Theme = {
         secondary: "blue",
         third: "green",
     },
+    heading: {
+        large: {
+            fontSize: "2rem",
+        },
+        medium: {
+            fontSize: '1.5rem',
+        },
+        small: {
+            fontSize: '1rem',
+        },
+    },
 };
 
 export const dark: Theme = {
+    ...light, // ligth object의 테마만 가져오고 name, color만 overriding 할꺼임
     name: 'dark',
     color: {
         primary: 'coral',
