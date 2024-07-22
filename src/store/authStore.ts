@@ -7,7 +7,7 @@ interface StoreState {
 };
 
 // Token 설정
-const getToken = () => {
+export const getToken = () => {
     const token = localStorage.getItem('token');
     return token;
 };
@@ -16,7 +16,7 @@ const setToken = (token: string) => {
     localStorage.setItem("token", token);
 };
 
-const removeToken = () => {
+export const removeToken = () => {
     localStorage.removeItem("token");
 }
 
