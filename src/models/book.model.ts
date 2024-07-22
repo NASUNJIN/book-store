@@ -3,13 +3,15 @@ export interface Book {
     title: string;
     img: number;
     category_id: number;
+    summary: string;
+    author: string;
+    price: string;
+    likes: number;
     form: string;
     isbn: string;
-    summary: string;
     detail: string;
-    author: string;
     pages: number;
-    likes: number;
+    contents: string;
     pubDate: string;
 };
 
