@@ -5,7 +5,7 @@ export interface Book {
     category_id: number;
     summary: string;
     author: string;
-    price: string;
+    price: number;
     likes: number;
     form: string;
     isbn: string;
