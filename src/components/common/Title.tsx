@@ -22,7 +22,7 @@ const Titlestyle = styled.h1<Omit<Props, "children">>`
     color: ${({ theme, color }) => (color 
     ? theme.color[color] // color가 있을 경우
     // color가 없을 경우
-    : theme.color.primary)}; color가 없을 경우
+    : theme.color.primary)};
 `;
 
 export default Title;
