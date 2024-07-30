@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "styled-components";
 import { useParams } from "react-router-dom";
 import { useBook } from "../hooks/useBook";
 import { getImgSrc } from "../utils/image";
@@ -8,6 +8,7 @@ import { formatDate, formatNumber } from "../utils/format";
 import { Link } from "react-router-dom";
 import EllipsisBox from "../components/common/EllipsisBox";
 import LikeButton from "../components/book/LikeButton";
+import AddToCart from "../components/book/AddToCart";
 
 const bookInfoList = [
     {
@@ -75,7 +76,9 @@ function BookDetail() {
                         <LikeButton book={book} onClick={likeToggle}/>
                     </div>
 
-                    <div className="add-cart">장바구니 넣기</div>
+                    <div className="add-cart">
+                        <AddToCart book={book}/>
+                    </div>
                 </div>
             </header>
             <div className="content">
@@ -130,13 +133,7 @@ const BookDetailStyle = styled.div`
     }
 
     .content {
-        /* .detail {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 4;
-            -webkit-box-orient: vertical;   
-        } */
+
     }
 `;
 
