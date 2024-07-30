@@ -47,7 +47,7 @@ const EllipsisBoxStyle = styled.div<EllipsisBoxStyleProps>`
         display: flex;
         justify-content: end;
         svg {
-            transform: ${({ $expanded }) => ($expanded ? 'rotate(180deg)' : 'rotate(0')};
+            transform: ${({ $expanded }) => ($expanded ? 'rotate(180deg)' : 'rotate(0)')};
         }
     }
 `;
