@@ -3,8 +3,6 @@ import { BookDetail } from "../../models/book.model";
 import InputText from "../common/InputText";
 import Button from "../common/Button";
 import React, { useState } from "react";
-import { addCart } from "../../api/carts.api";
-import { useAlert } from "../../hooks/useAlert";
 import { Link } from "react-router-dom";
 import { useBook } from "../../hooks/useBook";
 
