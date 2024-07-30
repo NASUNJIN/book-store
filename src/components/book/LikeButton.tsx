@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "styled-components";
 import { BookDetail } from "../../models/book.model";
 import Button from "../common/Button";
 import { FaHeart } from "react-icons/fa";
