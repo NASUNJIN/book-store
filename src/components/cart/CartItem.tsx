@@ -5,21 +5,34 @@ import Title from "../common/Title";
 import { formatNumber } from "../../utils/format";
 import CheckIconButton from "./CheckIconButton";
 import { useMemo } from "react";
+import { useAlert } from "../../hooks/useAlert";
 
 interface Props {
     cart: Cart;
     checkedItems : number[];
     onCheck: (id: number) => void;
+    onDelete: (id: number) => void;
 }
 
-function CartItem({ cart, checkedItems, onCheck }: Props) {
-    // checkedItems 목록에 내가 있늕 ㅣ판단 = checked
+function CartItem({ cart, checkedItems, onCheck, onDelete }: Props) {
+    const { showConfirm } = useAlert();
+
+    // checkedItems 목록에 내가 있는지판단 = checked
     const isChecked = useMemo(() => {
         return checkedItems.includes(cart.id);
     }, [checkedItems, cart.id]);
 
+    // 체크
     const handleCheck = () => {
         onCheck(cart.id);
+    };
+
+    // 장바구니 삭제
+    const handleDelete = () => {
+        // 컨펌 받기
+        showConfirm("정말 삭제하시겠습니까?", () => {
+            onDelete(cart.id);
+        });
     };
 
     return(
@@ -35,7 +48,7 @@ function CartItem({ cart, checkedItems, onCheck }: Props) {
                     <p className="quantity">{cart.quantity} 권</p>
                 </div>
             </div>
-            <Button size="medium" scheme="normal">
+            <Button size="medium" scheme="normal" onClick={handleDelete}>
                 장바구니 삭제
             </Button>
         </CartItemStyle>

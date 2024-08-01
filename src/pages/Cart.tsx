@@ -5,7 +5,7 @@ import { useCart } from "../hooks/useCart";
 import { useState } from "react";
 
 function Cart() {
-    const { carts } = useCart();
+    const { carts, delteCartItem } = useCart();
     const [checkedItems, setCheckedItems] = useState<number[]>([]);
 
     // 장바구니 체크
@@ -20,6 +20,12 @@ function Cart() {
         }
     };
 
+    // 장바구니 삭제 확인
+    const handleDelete = (id: number) => {
+        // 삭제 행위
+        delteCartItem(id);
+    };
+
     return (
         <>
             <Title size="large">장바구니</Title>
@@ -30,6 +36,7 @@ function Cart() {
                             key={item.id} cart={item} 
                             checkedItems={checkedItems} 
                             onCheck={handleCheckItem}
+                            onDelete={handleDelete}
                         />
                     ))}
                 </div>
