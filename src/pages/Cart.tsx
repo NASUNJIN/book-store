@@ -2,9 +2,10 @@ import styled from "styled-components";
 import Title from "../components/common/Title";
 import CartItem from "../components/cart/CartItem";
 import { useCart } from "../hooks/useCart";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Empty from "../components/common/Empty";
 import { FaShoppingCart } from "react-icons/fa";
+import CartSummary from "../components/cart/CartSummary";
 
 function Cart() {
     const { carts, delteCartItem, isEmpty } = useCart();
@@ -28,6 +29,26 @@ function Cart() {
         delteCartItem(id);
     };
 
+    // 총 수량
+    const totalQuantity = useMemo(() => {
+        return carts.reduce((acc, cart) => {
+            if (checkedItems.includes(cart.id)) {
+                return acc + cart.quantity;
+            }
+            return acc;
+        }, 0);
+    }, [carts, checkedItems]);
+
+    // 총 금액
+    const totalPrice = useMemo(() => {
+        return carts.reduce((acc, cart) => {
+            if (checkedItems.includes(cart.id)) {
+                return acc + (cart.price * cart.quantity);
+            }
+            return acc;
+        }, 0);
+    }, [carts, checkedItems]);
+
     return (
         <>
             <Title size="large">장바구니</Title>
@@ -44,7 +65,12 @@ function Cart() {
                                 />
                             ))}
                         </div>
-                        <div className="summary">summary</div>
+                        <div className="summary">
+                            <CartSummary 
+                                totalQuantity={totalQuantity} 
+                                totalPrice={totalPrice}
+                            />
+                        </div>
                     </>
                 )}
                 {isEmpty && (
@@ -60,7 +86,21 @@ function Cart() {
 };
 
 const CartStyle = styled.div`
+    display: flex;
+    gap: 24px;
+    justify-content: space-between;
+    padding: 24px 0 0 0;
 
+    .content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .summary {
+        display: flex;
+    }
 `;
 
 export default Cart;
