@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Title from "../components/common/Title";
 import { CartStyle } from "./Cart";
@@ -7,17 +7,22 @@ import Button from "../components/common/Button";
 import InputText from "../components/common/InputText";
 import { useForm } from "react-hook-form";
 import { Delivery, OrderSheet } from "../models/order.model";
+import FindAdressButton from "../components/order/FindAdressButton";
+import { order } from "../api/order.api";
+import { useAlert } from "../hooks/useAlert";
 
 interface DeliveryForm extends Delivery {
     addressDetail: string;
 }
 
 function Order() {
+    const { showAlert, showConfirm } = useAlert();
     const loacation = useLocation();
+    const navigate = useNavigate();
     const orderDataFromCart = loacation.state;
     const { totalQuantity, totalPrice, firstBookTitle } = orderDataFromCart;
 
-    const { register, handleSubmit, formState: {errors}, } = useForm<DeliveryForm>();
+    const { register, handleSubmit, formState: {errors}, setValue, } = useForm<DeliveryForm>();
 
     // 결제하기 버튼
     const handlePay = (data: DeliveryForm) => {
@@ -29,8 +34,13 @@ function Order() {
             },
         };
 
-        // 서버로 넘겨주기
-        console.log(orderData);
+        showConfirm("주문을 진행하시겠습니까?", () => {
+            // 서버로 넘겨주기
+            order(orderData).then(() => {
+                showAlert("주문이 처리되었습니다");
+                navigate('/orderlist');
+            });
+        });
     };
 
     return(
@@ -51,9 +61,11 @@ function Order() {
                                             {...register ("address", { required: true })} 
                                         />
                                     </div>
-                                    <Button size="medium" scheme="normal">
-                                        주소 찾기
-                                    </Button>
+                                    <FindAdressButton 
+                                        onComplated={(address) => {
+                                            setValue("address", address);
+                                        }}
+                                    />
                                 </fieldset>
                                 {errors.address && <p className="error-text">주소를 입력해 주세요.</p>}
 
