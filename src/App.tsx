@@ -12,81 +12,72 @@ import Cart from "./pages/Cart";
 import Order from "./pages/Order";
 import OrderList from "./pages/OrderList";
 
-const router = createBrowserRouter([
+const routeList = [
   {
     path: "/",
     element: (
-      <Layout>
         <Home />
-      </Layout>
     ),
-    errorElement: <Error />,
   },
   {
     path: "/books",
     element: (
-      <Layout>
         <Books />
-      </Layout>
     ),
   },
   {
     path: "/signup",
     element: (
-      <Layout>
         <Signup />
-      </Layout>
     ),
   },
   {
     path: "/reset",
     element: (
-      <Layout>
         <ResetPassword />
-      </Layout>
     ),
   },
   {
     path: "/login",
     element: (
-      <Layout>
         <Login />
-      </Layout>
     ),
   },
   {
     path: "/book/:bookId",
     element: (
-      <Layout>
         <BookDetail />
-      </Layout>
     ),
   },
   {
     path: "/cart",
     element: (
-      <Layout>
         <Cart />
-      </Layout>
     ),
   },
   {
     path: "/order",
     element: (
-      <Layout>
         <Order />
-      </Layout>
     ),
   },
   {
     path: "/orderlist",
     element: (
-      <Layout>
         <OrderList/>
-      </Layout>
     ),
   },
-]);
+];
+
+const router = createBrowserRouter(
+  routeList.map((item) => {
+    return {
+      ...item,
+      element: <Layout>{item.element}</Layout>,
+      errorElement: <Error />,
+    };
+  })
+);
 
 function App() {
 
@@ -95,6 +86,6 @@ function App() {
       <RouterProvider router={router} />
     </BookStoreThemeProvider>
   );
-}
+};
 
 export default App;
