@@ -19,15 +19,13 @@ function Header() {
             </h1>
             <nav className="category">
                 <ul>
-                    {
-                        category.map((item) => (
-                            <li key={item.category_id}>
-                                <Link to={item.category_id === null ? "books" : `/books?category_id=${item.category_id}`}>
-                                    {item.category_name}
-                                </Link>
-                            </li>
-                        ))
-                    }
+                    {category.map((item) => (
+                        <li key={item.category_id}>
+                            <Link to={item.category_id === null ? "/books" : `/books?category_id=${item.category_id}`}>
+                                {item.category_name}
+                            </Link>
+                        </li>
+                    ))}
                 </ul>
             </nav>
             <nav className="auth">
