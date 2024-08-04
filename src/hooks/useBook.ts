@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react"
-import { BookDetail } from "../models/book.model"
+import { BookDetail, BookReviewItem } from "../models/book.model"
 import { fetchBook, likeBook, unLikeBook } from "../api/books.api";
 import { useAuthStore } from "../store/authStore";
 import { useAlert } from "./useAlert";
 import { addCart } from "../api/carts.api";
+import { fetchBookReview } from "@/api/review.api";
 
 export const useBook = (bookId: string | undefined) => {
-    const[book, setBook] = useState<BookDetail | null>(null);
-    // 장바구니로 이동 alert
+    const [book, setBook] = useState<BookDetail | null>(null);
     const [cartAdded, setCartAdded] = useState(false);
+    const [reviews, setReviews] = useState<BookReviewItem[]>([]);
     const { isloggedIn } = useAuthStore();
     const { showAlert } = useAlert();
 
@@ -67,7 +68,12 @@ export const useBook = (bookId: string | undefined) => {
         fetchBook(bookId).then((book) => {
             setBook(book);
         });
+
+        // 리뷰
+        fetchBookReview(bookId).then((reviews) => {
+            setReviews(reviews);
+        });
     },[bookId]);
 
-    return { book, likeToggle, addToCart, cartAdded };
+    return { book, likeToggle, addToCart, cartAdded, reviews };
 };

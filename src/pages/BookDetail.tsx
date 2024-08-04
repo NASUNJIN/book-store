@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import EllipsisBox from "../components/common/EllipsisBox";
 import LikeButton from "../components/book/LikeButton";
 import AddToCart from "../components/book/AddToCart";
+import BookReview from "@/components/book/BookReview";
 
 const bookInfoList = [
     {
@@ -49,7 +50,9 @@ const bookInfoList = [
 
 function BookDetail() {
     const { bookId } = useParams();
-    const { book, likeToggle } = useBook(bookId);
+    const { book, likeToggle, reviews } = useBook(bookId);
+
+    console.log(reviews);
 
     // book이 null 일 수 있으므로 book.title -> null에는 title이 없기 때문에 return으로 null을 해줌
     if (!book) return null;
@@ -88,9 +91,9 @@ function BookDetail() {
                 </EllipsisBox>
 
                 <Title size="medium">목차</Title>
-                <p className="index">
-                    {book.contents}
-                </p>
+                <p className="index">{book.contents}</p>
+                <Title size="medium">리뷰</Title>
+                <BookReview reviews={reviews}/>
             </div>
         </BookDetailStyle>
     );
