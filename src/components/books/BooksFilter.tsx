@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { useCategory } from "../../hooks/useCategory";
-import Button from "../common/Button";
+import { useCategory } from "@/hooks/useCategory";
+import Button from "@/components/common/Button";
 import { useSearchParams } from "react-router-dom";
-import { QUERYSTIRNG } from "../../constants/querystring";
+import { QUERYSTIRNG } from "@/constants/querystring";
 
 
 function BooksFilter() {
