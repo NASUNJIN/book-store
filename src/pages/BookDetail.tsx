@@ -50,9 +50,7 @@ const bookInfoList = [
 
 function BookDetail() {
     const { bookId } = useParams();
-    const { book, likeToggle, reviews } = useBook(bookId);
-
-    console.log(reviews);
+    const { book, likeToggle, reviews, addReview } = useBook(bookId);
 
     // book이 null 일 수 있으므로 book.title -> null에는 title이 없기 때문에 return으로 null을 해줌
     if (!book) return null;
@@ -93,7 +91,7 @@ function BookDetail() {
                 <Title size="medium">목차</Title>
                 <p className="index">{book.contents}</p>
                 <Title size="medium">리뷰</Title>
-                <BookReview reviews={reviews}/>
+                <BookReview reviews={reviews} onAdd={addReview}/>
             </div>
         </BookDetailStyle>
     );

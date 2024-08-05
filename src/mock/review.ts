@@ -16,3 +16,14 @@ export const reviewsById = http.get("http://localhost:3000/reviews/:bookId", () 
         status: 200
     });
 });
+
+export const addReview = http.post("http://localhost:3000/reviews/:bookId", () => {
+    return HttpResponse.json(
+        {
+            message: "리뷰가 등록되었습니다."
+        },
+        {
+            status: 200,
+        }
+    );
+});
