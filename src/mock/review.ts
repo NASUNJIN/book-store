@@ -27,3 +27,10 @@ export const addReview = http.post("http://localhost:3000/reviews/:bookId", () =
         }
     );
 });
+
+export const reviewForMain = http.get("http://localhost:3000/reviews", () => {
+    const data: BookReviewItem[] = mockReviewData;
+    return HttpResponse.json(data, {
+        status: 200
+    });
+});

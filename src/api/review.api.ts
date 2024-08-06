@@ -1,4 +1,5 @@
 import { BookReviewItem, BookReviewItemWrite } from "@/models/book.model";
+import { requestHandler } from "./http";
 // import { requestHandler } from "./http";
 
 export const fetchBookReview = async (bookId: string) => {
@@ -30,4 +31,8 @@ export const addBookReview = async (bookId: string, reviewData:BookReviewItemWri
 
     const data = await response.json();
     return data;
+};
+
+export const fetchReviewAll = async () => {
+    return await requestHandler<BookReviewItem>("get", "/reviews");
 };
