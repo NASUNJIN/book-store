@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import BooksItem from "./BookItem";
+import BookItem from "./BookItem";
 import { Book } from "@/models/book.model";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -24,7 +24,7 @@ function BooksList({ books }: Props) {
     return (
         <BooksListStyle view={view} >
             {books?.map((item) => (
-                <BooksItem key={item.id} book={item} view={view}/>
+                <BookItem key={item.id} book={item} view={view}/>
             ))}
         </BooksListStyle>
     );

@@ -1,7 +1,7 @@
 import { Book } from "../../models/book.model";
 import { BookStoreThemeProvider } from "../../context/themeContext";
-import BooksItem from "./BookItem";
-import { getByAltText, render } from "@testing-library/react";
+import BookItem from "./BookItem";
+import { render } from "@testing-library/react";
 
 const dummyBook: Book = {
     id: 1,
@@ -24,7 +24,7 @@ describe("BookItem", () => {
     it("랜더 여부", () => {
         const { getByText, getByAltText } = render (
             <BookStoreThemeProvider>
-                <BooksItem book={dummyBook} />
+                <BookItem book={dummyBook} />
             </BookStoreThemeProvider>
         );
 
