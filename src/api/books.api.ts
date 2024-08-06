@@ -9,7 +9,7 @@ interface FetchBooksParams {
     limit: number;
 };
 
-interface FetchBooksResponse {
+export interface FetchBooksResponse {
     books: Book[];
     pagination: Pagination;
 }
@@ -30,7 +30,6 @@ export const fetchBooks = async (params: FetchBooksParams) => {
             },
         };
     }
-    
 };
 
 export const fetchBook = async (bookId: string) => { // router에서 받아오기 때문에 string으로 처리
