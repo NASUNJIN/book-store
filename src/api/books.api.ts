@@ -34,7 +34,6 @@ export const fetchBooks = async (params: FetchBooksParams) => {
 
 export const fetchBook = async (bookId: string) => { // router에서 받아오기 때문에 string으로 처리
     const response = await httpClient.get<BookDetail>(`/books/${bookId}`);
-
     return response.data;
 };
 
@@ -62,6 +61,12 @@ export const likeBook = async (bookId: number) => {
 // 좋아요 취소
 export const unLikeBook = async (bookId: number) => {
     const response = await httpClient.delete(`/likes/${bookId}`);
+    return response.data;
+};
 
+// 베스트 셀러
+export const fetchBestBooks = async () => {
+    // return await requestHandler<Book[]>("get", "/books/best");
+    const response = await httpClient.get<Book[]>(`/books/best`);
     return response.data;
 };
