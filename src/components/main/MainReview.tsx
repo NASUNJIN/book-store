@@ -6,18 +6,21 @@ import BookReviewItem from "../book/BookReviewItem";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 interface Props {
     reviews: IBookReviewItem[];
 }
 
 function MainReview({ reviews }: Props) {
+    const { isMobile } = useMediaQuery();
+    
     const sliderSettings = {
         dots: true,
         infinite: true,
         speed: 500,
-        sildesToShow: 3,
-        sliedsToScroll: 3,
+        sildesToShow: isMobile ? 1 : 3,
+        sliedsToScroll: isMobile ? 1 : 3,
         gap: 16,
     };
 
@@ -43,9 +46,18 @@ const MainReviewStyle = styled.div`
         margin: 0 12px;
     }
 
-    .slick-prev:before,
-    .slick-next:before {
+    .slick-prev:before, .slick-next:before {
         color: black;
+    }
+
+    @media screen AND (${({ theme }) => theme.mediaQuery.mobile}) {
+        .slick-prev {
+            left: 0;
+        }
+
+        .slick-next {
+            right: 0;
+        }
     }
 `;
 

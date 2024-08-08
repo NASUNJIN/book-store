@@ -29,10 +29,9 @@ export const fetchCart = async () => {
 
 export const deleteCart = async (cartId: number) => {
     const response = await httpClient.delete(`/carts/${cartId}`);
+    return response.data;
     // const token = localStorage.getItem('token');
     // if (token) {
 
     // }
-
-    return response.data;
 };

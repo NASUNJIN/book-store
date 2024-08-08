@@ -35,6 +35,17 @@ const FooterStyle = styled.footer`
             color: ${({ theme }) => theme.color.text};
         }
     }
+
+    @media screen AND (${({ theme }) => theme.mediaQuery.mobile}) {
+        flex-direction: column;
+        align-items: center;
+
+        .logo {
+            img {
+                width: 40px;
+            }
+        }
+    }  
 `;
 
 export default Footer;

@@ -8,9 +8,12 @@ import { useMain } from "@/hooks/useMain";
 import styled from "styled-components";
 import { CiFaceFrown } from "react-icons/ci";
 import Banner from "@/components/common/banner/Banner";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 function Home() {
     const { reviews, newBooks, bestBooks, banners } = useMain();
+    const { isMobile } = useMediaQuery();
+
     return (
         <HomeStyle>
             {/* 베너 */}
@@ -20,12 +23,10 @@ function Home() {
             <section className="section">
                 <Title size="large">베스트 셀러</Title>
                 {/* 서버가 준비되어있지 않아 일단 보류 */}
-                {/* <MainBest books={bestBooks} /> */}
-                <Empty 
-                    title="업데이트 중" 
-                    icon={<Loading/>}
-                    description={<>업데이트 중</>}
-                />
+                {
+                    bestBooks.length > 0 ? (<MainBest books={bestBooks} />)
+                    : <Empty title="업데이트 중" icon={<Loading/>} description={<>업데이트 중</>} />
+                }
             </section>
 
             {/* 신간 */}
@@ -33,7 +34,7 @@ function Home() {
                 <Title size="large">신간안내</Title>
                 {
                     newBooks.length > 0 ? (<MainNewBooks books={newBooks} />)
-                    : (<Empty  title="신간 정보가 없습니다." icon={<CiFaceFrown color="#5f5f5f" />} />)
+                    : <Empty  title="신간 정보가 없습니다." icon={<CiFaceFrown color="#5f5f5f" />} />
                 }
                 
             </section>

@@ -15,8 +15,8 @@ export const useMain = () => {
     useEffect(() => {
         fetchReviewAll().then((reviews) => {
             setReviews(reviews);
-            // console.log("reviews: ", reviews);
-        }).catch(error => console.log("Fetch reviews 실패", error));
+            console.log("fetchReviewAll 성공");
+        }).catch(error => console.log("fetchReviewAll 실패", error));
 
         fetchBooks({
             category_id: undefined,
@@ -25,16 +25,17 @@ export const useMain = () => {
             limit: 4
         }).then(({ books }) => {
             setNewBooks(books);
-            // console.log("books: ", books)
+            console.log("fetchBooks 성공")
         }).catch(error => console.log("fetchBook 실패", error));
 
         fetchBestBooks().then((books) => {
             setBestBooks(books);
-            // console.log("best books: ", books);
+            console.log("fetchBestBooks 성공");
         }).catch(error => console.log("fetchBestBooks 실패", error));
 
         fetchBanners().then((banners) => {
             setBanners(banners);
+            console.log("fetchBanners 성공")
         }).catch(error => console.log("fetchBanners 실패", error));;
 
     }, []);

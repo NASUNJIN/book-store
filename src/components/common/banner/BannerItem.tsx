@@ -66,25 +66,25 @@ const BannerItemStyle = styled.div`
         }
     }
 
-    /* @media screen AND (${({ theme }) => theme.mediaQuery.mobile}) {
+    @media screen AND (${({ theme }) => theme.mediaQuery.mobile}) {
         .content {
-        width: 100%;
-        background: linear-gradient(
-            to top,
-            rgba(255, 255, 255, 1),
-            rgba(255, 255, 255, 0)
-        );
+            width: 100%;
+            background: linear-gradient(
+                to top,
+                rgba(255, 255, 255, 1),
+                rgba(255, 255, 255, 0)
+            );
 
-        h2 {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-        }
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 8px;
+            }
 
-        p {
-            font-size: 0.75rem;
+            p {
+                font-size: 0.75rem;
+            }
         }
-        }
-    } */
+    }
 `;
 
 export default BannerItem;

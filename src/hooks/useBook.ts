@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { BookDetail, BookReviewItem, BookReviewItemWrite } from "../models/book.model"
-import { fetchBook, likeBook, unLikeBook } from "../api/books.api";
+import { fetchBook, likeBook, unlikeBook } from "../api/books.api";
 import { useAuthStore } from "../store/authStore";
 import { useAlert } from "./useAlert";
 import { addCart } from "../api/carts.api";
@@ -29,13 +29,13 @@ export const useBook = (bookId: string | undefined) => {
         try {
             if (book.liked) {
                 // 라이크 상태 -> 언라이크 실행
-                unLikeBook(book.id).then(() => {
+                unlikeBook(book.id).then(() => {
                     setBook({
                         ...book,
-                        liked:false,
+                        liked: false,
                         likes: book.likes - 1,
                     });
-                    showToast("좋아요가 취소되었습니다.");
+                    showToast("좋아요를 취소했습니다.");
                 });
             } else {
                 // 언라이크 상태 -> 라이크 실행
@@ -46,7 +46,7 @@ export const useBook = (bookId: string | undefined) => {
                         liked: true,
                         likes: book.likes + 1,
                     });
-                    showToast("좋아요가 성공했습니다.");
+                    showToast("좋아요를 눌렀습니다.");
                 });
             }
         } catch (error) {
@@ -88,7 +88,7 @@ export const useBook = (bookId: string | undefined) => {
             // fetchBookReview(book.id.toString()).then((reviews) => {
             //     setReviews(reviews);
             // });
-            showAlert(res.message);
+            showAlert(res?.message);
         });
     };
 
